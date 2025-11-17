@@ -2,7 +2,7 @@
 
 The research data required for this project **is not distributed via Git** and must be requested separately.  
 Members of this work group and staff of **opencampus.sh** can request access through the following link:  
-👉 [**Request data access here**](...)
+👉 [**Request data access here**](https://drive.google.com/drive/folders/1eSk1zhh4y4rrnNysX4uoIH6vq8G8SZEV)
 
 Please treat all provided data **confidentially**.
 
