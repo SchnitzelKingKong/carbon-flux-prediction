@@ -31,7 +31,7 @@ Approaches or solutions that have been tried before on similar projects.
 
 - **Source 4**: From time series to image analysis: A transfer learning approach for night setback identification of district heating substations, Zhang et al. 2021
 
-  - **[Online Link](https://www.sciencedirect.com/science/article/pii/S2352710221003946)
+  - **[Online Link](https://www.sciencedirect.com/science/article/pii/S2352710221003946)**
   - **Objective**: Use deep learning convolutional neural networks to classify time-series of district heating substations by turning time-series into heatmap images with the shape (hour of the day x day of the month x normalized heat energy usage).
   - **Methods**: Transfer learning is used to take advantage of pre-trained fundamental feature detection. Used models were: Resnet, Vgg, Alexnet, Squeezenet, MobilenetV2, Densenet, and variations. They generated images from time-series data and then applied augmentation (gaussian noise, sliding window, mixup). They tested training with feature extraction and full fine-tuning (discriminative learning rates). Then they tested all trained models and compared accuracy, f1, precision and recall. They also use gradient class activation map (GRAD_CAM) and guided back-propagation to interpret the models.
   - **Outcomes**: All models achieved an overall accuracy > 0.95 and f1 > 0.9, with MobilenetV2 performing the best. GRAD-CAM and guided backpropagation maps highlighted areas as important which are considered relevant for classification by experts.
