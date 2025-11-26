@@ -12,6 +12,10 @@
 
 - **Biases:**
     - Classes are not equally represented (259 - 1072 profiles per cluster)
+        - set batch size so that each batch likely has a few prfofiles of every cluster
+        - use transfer learning
+        - update loss function so that weight is greater for less common classes
+
     - Geographic areas and years are not equally represented (see histograms of Latitude, Longitude & datetime)
         - ensure similar geographical and temporal distribution in training/validation/test split
 
@@ -23,33 +27,33 @@
 
 - **Correlations:**
     - Neighboring size classes & depth levels are generally positively correlated in biovolume
-    - Environmental variables are often highly correlated with each other (e.g., no3 & po4; phyc, chl & O2) -> we already consider this in the way we form clusters by first extracting loadings which represent combined patterns of variables
+        - CNN layer suitable to detect patterns of neighboring "pixels"
+    - Environmental variables are often highly correlated with each other (e.g., no3 & po4; phyc, chl & O2) 
+        - we already consider this in the way we form clusters by first extracting loadings which represent combined patterns of variables
 
 - **Data format:**
     - "Images" are not square -> 40 x 17
         - use of non-square kernels for CNN layers?
 
-
 ### Metrics for model:
+**Definitions**:
+- Accuracy: ratio of correctly predicted instances over all instances (over the whole dataset), "x % of predictions were correct"
+- Recall (or true positive rate, TPR): proportion of all instances in a class that were classified correctly as that class (one value for each class), "X % of positives were correctly classified"
+- Precision: proportion of all positive classifications which were actually positive (one value for each class), "x % of positive predictions were correct"
+- False positive rate (FPR): proportion of all actual negatives which were classified incorrecty as positives, "x % were falsely classified as positive"
+- F1 score: harmonic mean of precision and recall, F1 score better than accuracy for imbalanced datasets
 
-##### Overview of possible metrics:
+**Suitable metrics for imbalanced dataset**:
 
 | Metric | What it provides | Cons / shortcomings |
 |---|---:|---|
-| Accuracy | Overall fraction of correctly classified profiles (simple, intuitive). | Dominated by majority classes in imbalanced data — can be misleading. |
 | Macro F1 (average of per-class F1) | Single summary that treats each class equally, balances precision & recall per class. Good for imbalanced multiclass. | Not a training loss (non-differentiable). Can hide which classes fail — inspect per-class scores too. |
-| Macro recall (or Balanced Accuracy) | Average recall (sensitivity) across classes; reveals how well true positives are recovered in each class. | Ignores precision; vulnerable to many false positives if used alone. |
 | Per-class Precision / Recall / F1 | Detailed diagnostics for each cluster: which classes are missed, which produce many false alarms. | Many numbers to inspect for many classes; requires table/visualization to be useful. |
 | Confusion matrix | Visualizes which classes are confused with which (pairwise errors). | Needs normalization/annotation to be interpretable; hard to summarize in a single number. |
-| ROC AUC (one-vs-rest, multiclass) | Threshold-independent measure of separability for each class vs rest; summary of ranking ability. | Unreliable for very imbalanced classes (inflated by many negatives); multi-class OVR aggregation can be hard to interpret. |
-| PR-AUC / Average Precision (per-class) | Precision–recall area under curve; focuses on positive-class performance and is better for rare classes. | Hard to aggregate into a single multiclass number; unstable with very few positives. |
-| Log loss (cross-entropy) | Measures probabilistic quality of predictions (penalizes overconfident wrong predictions); smooth for training. | Harder to interpret directly in application terms; influenced by class imbalance unless weighted. |
-| Brier score (and calibration plots) | Measures calibration (how well predicted probabilities match observed frequencies). | Not about ranking or top-1 accuracy; low Brier can coincide with poor discrimination. |
 | Top‑K accuracy (e.g., top‑3) | Useful when predicting a small set of likely clusters is acceptable. Shows whether true class is among top-K predictions. | Ignores whether the top choices are sensible; can obscure poor top‑1 performance. |
-| Matthews Correlation Coefficient (MCC) / Cohen's Kappa | Single balanced measure that accounts for true/false positives/negatives (MCC) or agreement beyond chance (Kappa). | Less familiar to some audiences; interpretation less intuitive than precision/recall; per-class extension for multiclass is possible but more complex. |
-
 
 ### Baseline Model:
 
 
 ### Questions for instructor:
+- 
