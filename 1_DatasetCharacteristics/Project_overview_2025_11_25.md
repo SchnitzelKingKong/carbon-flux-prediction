@@ -22,7 +22,7 @@
 - **Feature distributions:**
     - Biovolume data is close to log normally distributed - many outliers and extreme values in upper depth layers
     - Increasingly higher mean biovolume in larger size classes (nromalize to size class width?)
-    - Upper edge (firstd depth bins) is ecologically important and often has high biovolumes (phytoplankton blooms) -> needs to be well represented
+    - Upper edge (first depth bins) is ecologically important and often has high biovolumes (phytoplankton blooms) -> needs to be well represented
         - padding?  
 
 - **Correlations:**
@@ -47,13 +47,16 @@
 
 | Metric | What it provides | Cons / shortcomings |
 |---|---:|---|
-| Macro F1 (average of per-class F1) | Single summary that treats each class equally, balances precision & recall per class. Good for imbalanced multiclass. | Not a training loss (non-differentiable). Can hide which classes fail — inspect per-class scores too. |
+| Macro F1 (average of per-class F1) | Single summary that treats each class equally, balances precision & recall per class. Good for imbalanced multiclass. | Not a training loss (can not be used for gradient descent, use categorical cross-entropy). Can hide which classes fail — inspect per-class scores too. |
 | Per-class Precision / Recall / F1 | Detailed diagnostics for each cluster: which classes are missed, which produce many false alarms. | Many numbers to inspect for many classes; requires table/visualization to be useful. |
 | Confusion matrix | Visualizes which classes are confused with which (pairwise errors). | Needs normalization/annotation to be interpretable; hard to summarize in a single number. |
 | Top‑K accuracy (e.g., top‑3) | Useful when predicting a small set of likely clusters is acceptable. Shows whether true class is among top-K predictions. | Ignores whether the top choices are sensible; can obscure poor top‑1 performance. |
 
 ### Baseline Model:
-
+- what is a baseline model for a CNN?
 
 ### Questions for instructor:
-- 
+- If we want to use transfer learning (from large image classification models), do we have to use actual heatmap-images? Or can we work with the tensors consisting of our scaled biovolume data?
+- Most augmentation methods are not well-suited for our problem (because position of biovolume in image space is important).
+    - what could be relevant augmentation steps? (adding noise?)
+- "Images" are not square - can we use non-square kernels for CNN layers, or better adapt shape to 1:1 ratio?
