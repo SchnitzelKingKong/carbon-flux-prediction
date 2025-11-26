@@ -36,7 +36,7 @@
         - use of non-square kernels for CNN layers?
 
 ### Metrics for model:
-**Definitions**:
+**Definitions**: [Source](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall)
 - Accuracy: ratio of correctly predicted instances over all instances (over the whole dataset), "x % of predictions were correct"
 - Recall (or true positive rate, TPR): proportion of all instances in a class that were classified correctly as that class (one value for each class), "X % of positives were correctly classified"
 - Precision: proportion of all positive classifications which were actually positive (one value for each class), "x % of positive predictions were correct"
