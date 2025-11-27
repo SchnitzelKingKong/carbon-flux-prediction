@@ -5,7 +5,7 @@
 
 - Aim: Predict environmental cluster from vertical profiles of particle biovolume mesured for 40 depth and 17 size classes
     - Each Profile has the shape (40 depths, 17 sizes, 1 biovolume), we have 5613 profiles (observations) which are all mapped to specific environmental clusters based on thier date and location of sample collection
-
+ 
 ### To consider:
 - **Missing values**
     - pre-filtered Profile_ids to only include profiles with data in all depths (see [notebook](DatasetPreProcessing/1_DatasetPreProcessing.ipynb))
