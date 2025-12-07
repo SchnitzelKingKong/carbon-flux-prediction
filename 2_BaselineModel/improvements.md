@@ -27,3 +27,6 @@ print("CV F1 Macro:", scores['test_score'].mean())
 from imblearn.over_sampling import SMOTE
 smote = SMOTE(random_state=42, k_neighbors=5)
 X_train_smote, y_train_smote = smote.fit_resample(X_train, y_train)
+
+
+# 5. use XGboost as model
