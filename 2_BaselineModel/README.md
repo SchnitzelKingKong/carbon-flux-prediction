@@ -18,10 +18,12 @@
 |Balanced Accuracy| 0.99| 0.34| mean=0.3253, std=0.0162|
 |Macro F1| 0.99| 0.34| mean=0.2900, std=0.0274|
 
-- **Confusion Matrix**:
+### Confusion Matrix
+
 ![Confusion Matrix baseline RF](image.png)
 
-- **Global feature importance map**:
+### Global feature importance map
+
 ![feature importance baseline RF](image-1.png)
 
 ### Evaluation Methodology
