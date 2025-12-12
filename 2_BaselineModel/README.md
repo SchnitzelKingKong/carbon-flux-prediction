@@ -13,6 +13,7 @@
 - **Performance Scores:** 
 
 |**Metric** |**Training set** | **Test set**| **Cross-Validation Score**|
+|---|---|---|---|
 |Accuracy| 0.99 | 0.38|  mean=0.3205, std=0.0330|
 |Balanced Accuracy| 0.99| 0.34| mean=0.3253, std=0.0162|
 |Macro F1| 0.99| 0.34| mean=0.2900, std=0.0274|
