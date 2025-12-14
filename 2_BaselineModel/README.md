@@ -5,20 +5,60 @@
 ## Baseline Model Results
 
 ### Model Selection
-- **Baseline Model Type:** [e.g., Random Forest, Logistic Regression, Linear Regression, Naive Bayes, etc.]
-- **Rationale:** [Brief explanation of why this model was chosen as baseline]
+- **Baseline Model Type:** Random Forest
+- **Rationale:** Random Forest allows to compute feature importance values which allow us to reduce the number of features for later models. Additionally, Random Forest is well suited as a baseline for this dataset because it handles high-dimensional, non-linear features effectively and requires minimal preprocessing of the biovolume bins. It is robust to noise, correlations, and class imbalance, and it provides interpretable feature importances. This makes it a strong, reliable reference model before exploring more complex approaches.
 
 ### Model Performance
-- **Evaluation Metric:** [e.g., Accuracy, F1-Score, Precision, Recall, MSE, MAE, R², etc.]
-- **Performance Score:** [e.g., 85% accuracy, F1-score of 0.78, MSE of 0.15]
-- **Cross-Validation Score:** [Mean and standard deviation of CV scores, e.g., 0.82 ± 0.03]
+- **Evaluation Metric:** Accuracy, Balanced Accuraccy, Macro F1
+- **Performance Scores:** 
+
+|**Metric** |**Training set** | **Test set**| **Cross-Validation Score**|
+|---|---|---|---|
+|Accuracy| 0.99 | 0.38|  mean=0.3205, std=0.0330|
+|Balanced Accuracy| 0.99| 0.34| mean=0.3253, std=0.0162|
+|Macro F1| 0.99| 0.34| mean=0.2900, std=0.0274|
+
+### Confusion Matrix
+
+![Confusion Matrix baseline RF](image.png)
+
+### Global feature importance map
+
+![feature importance baseline RF](image-1.png)
 
 ### Evaluation Methodology
-- **Data Split:** [Train/Validation/Test split ratios, e.g., 70/15/15]
-- **Evaluation Metrics:** [List all metrics used and justify why they are appropriate for this problem]
+- **Data Split:** 
+Test = ~25 %; Train = 75%, split train data into 4 folds, each ~18% of all data
+
+- **Evaluation Metrics:** To assess the baseline model’s performance and establish reference values for more complex models later on, following metrics are used:
+
+    - **Accuracy**: Measures the overall proportion of correct predictions. Useful for a general performance overview, but limited when class imbalance is present. 
+
+    - **Balanced Accuracy**: Computes the average accuracy across all classes, giving equal weight to minority and majority classes. This metric is essential because the cluster distribution is imbalanced.
+
+    - **Macro F1 Score**: Averages the F1-score across all classes without weighting by class frequency. This provides a balanced view of precision and recall for each cluster, including minority groups.
+
+- *More detailed evaluation and interpretation*:
+    - **Confusion Matrix**: Visualizes how often each cluster is correctly and incorrectly classified. Helps detect systematic misclassification patterns between clusters.
+
+    - **Classification Report**: Summarizes precision, recall, and F1-score for each class individually. Supports detailed assessment of classes that are harder to separate.
+
+    - **SHAP (SHapley Additive exPlanations)**: Provides model-agnostic feature-attribution scores that show how much each feature contributes to a prediction. SHAP was used to: interpret global feature importance and analyze feature effects for each cluster. For later CNN models, this can be replaced by GRAD-CAM or other methods which visualize feature importance as heatmaps.
 
 ### Metric Practical Relevance
-[Explain the practical relevance and business impact of each chosen evaluation metric. How do these metrics translate to real-world performance and decision-making? What do the metric values mean in the context of your specific problem domain?]
+- Practical goal: ensure the model not only achieves reasonable overall correctness but also performs acceptably on minority classes (rarer environmental clusters).
+- Interpretation of results:
+    - High training accuracy/balanced accuracy/macro F1 (0.99) and low cross-validation and test scores suggests high overfitting, affecting all classes.
+    - Accuracy was slightly higher in cross-validation (0.38) compared to balanced accuracy and Macro F1 (0.34), indicating influence of larger clusters. Focus should be on balanced metrics for further models.
+- Actions: 
+    - augmentation with noise to reduce overfitting
+    - include hierarchal structure of clusters in future models (some environmental clusters are more similar than others)
+        - potentially pool clusters which are small and similar in environmental conditions
+    - compare confusion matrix and environmental cluster hierarchy - are clusters which are more similar in environmental conditions confused more often?
+    - reduce features: remove three largest size bins for all depths because they have 0 feature importance across all classes (reduces overall feature number from 680 to 560)
+- Conclusion:
+    - RF is not suitable for the proposed problem, liekly because it does not include 2D relationships between neighboring size x depth-bins. Convolutional neural nets may result in better predictions.
 
 ## Next Steps
-This baseline model serves as a reference point for evaluating more sophisticated models in the [Model Definition and Evaluation](../3_Model/README.md) phase.
+- This baseline model serves as a reference point for evaluating more sophisticated models in the [Model Definition and Evaluation](../3_Model/README.md) phase. 
+- SHAP analyses of feature importance revealed that the three largest size classes did not add any information for the classification model. These features will therefore be removed for proceeding analyses.
