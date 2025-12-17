@@ -14,9 +14,9 @@
 
 |**Metric** |**Training set** | **Test set**| **Cross-Validation Score**|
 |---|---|---|---|
-|Accuracy| 0.99 | 0.38|  mean=0.3205, std=0.0330|
-|Balanced Accuracy| 0.99| 0.34| mean=0.3253, std=0.0162|
-|Macro F1| 0.99| 0.34| mean=0.2900, std=0.0274|
+|Accuracy| 0.99 | 0.57|  mean=0.5313, std=0.0342|
+|Balanced Accuracy| 0.99| 0.56| mean=0.5311, std=0.0318|
+|Macro F1| 0.99| 0.57| mean=0.5310, std=0.0344|
 
 ### Confusion Matrix
 
@@ -28,7 +28,9 @@
 
 ### Evaluation Methodology
 - **Data Split:** 
-Test = ~25 %; Train = 75%, split train data into 4 folds, each ~18% of all data
+Test = ~25 %; Train = 75%, split train data into 4 folds, each ~18% of all data. After cross-validation, a final model war trained on all trianing data.
+
+- see [notebook](train-test-val-split.ipynb) for methods on ensuring equal geographical and cluster-distribiton
 
 - **Evaluation Metrics:** To assess the baseline model’s performance and establish reference values for more complex models later on, following metrics are used:
 
