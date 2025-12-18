@@ -9,20 +9,34 @@
 - **Dataset Owner/Contact:** Rainer Kiko, [ORCid](https://orcid.org/0000-0002-7851-9107)
 
 ### Dataset Characteristics
-- **Number of Observations:** 5613 vertical profiles of particle biovolume, aggregated to 40 depth bins of 25 m (0-1000 m), particle biovolumes estimated for 17 size classes (~ 0.2 - 10 mm)
-- **Number of Features:** 5613 x 40 x 17 = 3,816,840
+- **Number of Observations:** 5619 vertical profiles of particle biovolume, aggregated to 40 depth bins of 25 m (0-1000 m), particle biovolumes estimated for 17 size classes (~ 0.2 - 10 mm)
+- **Number of Features:** 5619 x 40 x 17 = 3,816,840; 680 features per profile
 
 ### Target Variable/Label
 - **Label Name:** cluster
 - **Label Type:** Classification
 - **Label Description:** Clusters are based on prior classification of profiles by vertical patterns of environmental variables (e.g., temperature, salinity, nutrients,...; 10 variables in total), see [Notebook](DatasetPreProcessing/2_Environmental_clusters.ipynb). Prediction task: predict the envrionmental cluster based on particle biovolume distribution.
-- **Label Values:** 0-9 (10 clusters, each representing specific envrionmental conditions within the upper 1000 m of the ocean)
-- **Label Distribution:** Classes are not balanced, with large differences in cluter sizes. Cluster 0: 367 profiles; cluster 1: 1072 profiles; cluster 2: 452 profiles; cluster 3: 590 profiles; cluster 4: 319 profiles; cluster 5: 411 profiles; cluster 6: 606 profiles; cluster 7: 259 profiles; cluster 8: 883 profiles; cluster 9: 654 profiles.
+- **Label Values:** 0-9 (10 clusters, each representing specific envrionmental conditions within the upper 1000 m of the ocean; envrionmental variables were normalized per profile so that **only the vertical pattern of each env. variable is considered, not the absolute value**)
+- **Label Distribution:** Classes are not balanced, with large differences in cluter sizes. 
+
+|Cluster | n (cluster) |
+|---|---|
+|4  |  738|
+|0  |  713|
+|8  |  713|
+|2  |  682|
+|7  |  563|
+|1  |  549|
+|6  |  527|
+|9  |  494|
+|5  |  391|
+|3  |  249|
+
 ![Environmental clusters](image.png)
-![Geographical distribution of environmental clusters](image-2.png)
+![Geographical distribution](image-2.png)
+![PCA](image-3.png)
 
 ### Feature Description
-[Provide a brief description of each feature or group of features in your dataset. If you have many features, group them logically and describe each group. Include information about data types, ranges, and what each feature represents.]
 
 - Features are particle biovolumes (original unit: mm^3 L^-1), normalized per profile.
 - Each profile has a biovolume value (feature) for each of 40 depths and 17 size classes, resulting in 680 features (or pixels).
