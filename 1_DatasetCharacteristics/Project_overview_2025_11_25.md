@@ -1,7 +1,7 @@
 # Notes for feedback session week 6
 
 ### Project summary:
-![Overview Image](<../CoverImage/image (1).png>)
+![Overview Image](<../CoverImage/cover_image.png>)
 
 - Aim: Predict environmental cluster from vertical profiles of particle biovolume mesured for 40 depth and 17 size classes
     - Each Profile has the shape (40 depths, 17 sizes, 1 biovolume), we have 5613 profiles (observations) which are all mapped to specific environmental clusters based on thier date and location of sample collection
