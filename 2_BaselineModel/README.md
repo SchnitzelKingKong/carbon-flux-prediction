@@ -14,17 +14,17 @@
 
 |**Metric** |**Training set** | **Test set**| **Cross-Validation Score**|
 |---|---|---|---|
-|Accuracy| 0.99 | 0.57|  mean=0.5313, std=0.0342|
-|Balanced Accuracy| 0.99| 0.56| mean=0.5311, std=0.0318|
-|Macro F1| 0.99| 0.57| mean=0.5310, std=0.0344|
+|Accuracy| 0.99 | 0.55|  mean=0.5000, std=0.0195|
+|Balanced Accuracy| 0.99| 0.54| mean=0.5005, std=0.0205|
+|Macro F1| 0.99| 0.53| mean=0.4914, std=0.0197|
 
 ### Confusion Matrix
 
-![Confusion Matrix baseline RF](image.png)
+![Confusion Matrix RF](image-1.png)
 
 ### Global feature importance map
 
-![feature importance baseline RF](image-1.png)
+![feature importance baseline RF](image.png)
 
 ### Evaluation Methodology
 - **Data Split:** 

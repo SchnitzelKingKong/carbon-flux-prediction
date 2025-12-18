@@ -7,12 +7,11 @@
 |**Metric**       |**Training set** | **Test set** | **Cross-Validation Score**|
 |---|---|---|---|
 | **Baseline model: RF** |          |              |                           |
-|Accuracy         | 0.99            | 0.57         | mean=0.5313, std=0.0342   |
-|Balanced Accuracy| 0.99            | 0.56         | mean=0.5311, std=0.0318   |
-|Macro F1         | 0.99            | 0.57         | mean=0.5310, std=0.0344   |
+|Balanced Accuracy| 0.99            | 0.54         | mean=0.5005, std=0.0205   |
+|Macro F1         | 0.99            | 0.53         | mean=0.4914, std=0.0197   |
 | **First CNN: small heatmaps** |   |              |                           |
-|Balanced Accuracy| 0.8345 ± 0.0444 |              | mean=0.5737, std=0.0272   |
-|Macro F1         | 0.8348 ± 0.0438 |              | mean=0.5699, std=0.0270   |
+|Balanced Accuracy| 0.8175 ± 0.0420 |              | mean=0.5901, std=0.0157   |
+|Macro F1         | 0.8159 ± 0.0431 |              | mean=0.5849, std=0.0189   |
 
 
 # First CNN: small heatmaps
