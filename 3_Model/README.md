@@ -30,4 +30,5 @@
 - Data input shape: 45 x 45 x 4 (pixel shape, channels)
 - small heatmaps where 3 pixels along the x-axis = 1 datapoint, including padding to get a square
 - simple over/undersampling to mean per class for each fold
-- **Comparison to baseline:** CV metics ~ 3% better, less overfitting (training scores at 83% not 99)
+- **Comparison to baseline:** CV metics ~ 8-9% better, less overfitting (training scores at 82% not 99)
+
