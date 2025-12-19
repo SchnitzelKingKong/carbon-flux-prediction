@@ -45,3 +45,21 @@
 
 
 - No softmax layer for training (Steffen) - how to implement this? Do we need different metrics to assess output layer?
+
+**2nd feedback session 18.12.2026 - Jake comments**:
+- heatmaps:
+	- image size: max. 256 x 256 pixels (current 240 x 240 seems good)
+	- colors of the heatmap: set according to transfer learning model used
+	- try finding a medical model for transfer learning (e.g. X-ray images) and adjust heatmap images to input images of model
+- when using transfer learning, we can gradually train more layers from the back (with a function per epoch, e.g., every 10 epochs train 5 more layers -> this way the network can slowly adjust to our images)
+- Hyperparameter tuning:
+	- keras.tuner (in tensorflow)
+	- raytune (faster because it first only tests a few epoch per parameter and only trains the full model on the best performing hyperparameters)
+	- either grid search or random search
+	- set boundaries for search with ChatGPT 
+- Data split:
+	- random split is okay because our aim is to find patterns, not make predictions
+	- once we have a final model, we can also train on the full dataset (with no split) to get highest statistical power and interpret feature maps
+- Model interpretation / explainable AI:
+	- SHAP is good because it can be used for any model and gives positive and negative values (to visualise feature distribution per cluster)
+	- Also look into weight visualisation (e.g., GRAD-CAM) which can show where the model "looks" for classification decisins
