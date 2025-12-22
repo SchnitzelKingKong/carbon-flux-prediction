@@ -24,7 +24,7 @@
 
 ### Global feature importance map
 
-![feature importance baseline RF](image.png)
+![feature importance baseline RF](image-2.png)
 
 ### Evaluation Methodology
 - **Data Split:** 
