@@ -72,5 +72,9 @@
         - moderately_similar: 50th percentile of distances
         - different: 75th percentile of distances
 
+#### Hierarchy of clusters
+![Environmental clusters PCA hierarchy](image-6.png)
+![Environmental clusters map hierarchy](image-5.png)
+
 **Hierarchical accuracy thresholds**
 ![thresholds hierarchical acc.](image.png)

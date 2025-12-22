@@ -36,10 +36,6 @@
 ![Geographical distribution](image-2.png)
 ![PCA](image-3.png)
 
-#### Hierarchy of clusters
-![Environmental clusters PCA hierarchy](image-6.png)
-![Environmental clusters map hierarchy](image-5.png)
-
 ### Feature Description
 
 - Features are particle biovolumes (original unit: mm^3 L^-1), normalized per profile.
