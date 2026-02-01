@@ -1,0 +1,75 @@
+- Class: **HeatmapCNNClassifier**
+	- class containing information on data directories and file paths
+	- all functions are added to this class to inherit the information
+
+### Functions for data preparation
+- **load_data_assignments(self)**: Load data assignments from pickle files
+	- train_test_file
+	- cluster mapping file
+- **load_heatmaps(self)**: Load heatmap images and create feature matrices
+	- Get list of available heatmap files
+	- Extract profile IDs from filenames (remove .png extension)
+	- Convert profile IDs to consistent format (strings)
+	- Find common profile IDs across all data sources (train_test, clusters file, heatmap files)
+	- For every Profile_id
+		- loads image
+		- normalises pixel values (/255.0)
+		- extracts cluster information (y_data)
+		- extracts data_type (train or test)
+		- extracts CV_fold (1-4) for train data
+	- creates: X_data, y_data, profile_ids, data_types, cv_folds
+- **split_train_test(self):** Split data into train and test sets based on pre-defined assignments
+	- also encodes labels (to ensure clusters are in the format (0,1,2,3,...) for both train and test data) 
+	- creates: X_train, y_train_encoded, train_profile_ids, train_cv_folds, X_test, y_test_encoded, test_profile_ids
+- **balance_classes_per_fold_SMOTETomek(self)**: Apply balancing within each CV fold separately using SMOTE + Tomek links
+- **balance_classes_per_fold_simple(self)**: Apply simple over/undersampling to mean cluster size within each CV fold
+	- also shuffles balanced training data
+	- creates: X_train_balanced, y_train_balanced
+- **scale_data(self)**: Scale heatmap pixel data
+	- scales data to get mean = 0 and std = 1
+	- pixel data was first divided by 255.0 during loading, now it is additionally scaled
+### Function for data augmentation
+- **BlockGaussianNoise(Layer)**: Custom layer for block-wise Gaussian noise augmentation
+	- adds noise in block-wise method to imitate the structure of the data -> heatmap conversion (1 size class = 3 pixels on the horizontal axis)
+	- to adjust: noise_level, block_size, seed
+
+### Functions for simple CNN
+- **create_cnn_model(self, input_shape)**
+- **compile_model(self, model)
+- **cross_validate(self)**
+	- for each of the 4 folds
+		- creates and compiles a fresh model
+		- trains a model on the folds training data and evaluates on folds validation data
+		- calculates evaluation metrics per-fold
+	- prints cross-validation results with the below function
+- **print_cv_results(self)**
+	- Print comprehensive cross-validation results including training metrics
+- **plot_cv_fold_confusion_matrices(self, k=k)**: plots one confusion matrix per fold
+- **run_full_pipeline(self)**: perform cross-validation
+
+### Functions for hyperparameter tuning
+- **create_optuna_cnn_model(self, input_shape, config)**: create CNN model with optuna-optimized parameters
+	- same number of layers as before (simple CNN), but now hyperparameters are replaced with variables
+	- vars: 
+		- noise_level
+		- block_size
+		- conv_filters_1 - 3 (nodes for three blocks of convolutional layers)
+		- dropout_rate_conv (dropout for convolutional layer blocks)
+		- dense_units_1 - 2 (nodes for 2 dense layers)
+		- dropout_rate_dense (dropout rate for two dense layers)
+- **optimize_cnn_with_optuna(self, num_trials=30, max_epochs=25, cv_fold=None, timeout_minutes=60)**: optuna hyperparameter optimization
+	- under "config", suggest hyperparameters and ranges for tuning
+		- learning rate
+		- batch size
+		- values for model creation
+		- lr_reduction_factor
+		- lr_patience
+		- early_stop_patience
+	- For each combination of config parameters
+		- creates a model with "create_optuna_cnn_model"
+		- compiles a model
+		- defines callbacks
+		- trains a model for up to 25 epochs
+		- saves model parameters for comparison
+		- deletes model
+- **load_optimal_config(self, config_path)**: loads optimal configuration file

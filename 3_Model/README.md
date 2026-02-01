@@ -2,40 +2,16 @@
 
 **[Notebook](model_definition_evaluation)**
 
-# Model comparison:
+# Model comparison (4 clusters):
 
 |**Metric**       |**Training set** | **Test set** | **Cross-Validation Score**|
 |---|---|---|---|
 | **Baseline model: RF** |          |              |                           |
-|Balanced Accuracy| 0.99            | 0.54         | 0.5005 ± 0.0205           |
-|Macro F1         | 0.99            | 0.53         | 0.4914 ± 0.0197           |
+|Balanced Accuracy| 0.99            | 0.74         | 0.73 ± 0.03           |
 | **First CNN: small heatmaps** |   |              |                           |
-|Balanced Accuracy| 0.8175 ± 0.0420 |              | 0.5901 ± 0.0157           |
-|Macro F1         | 0.8159 ± 0.0431 |              | 0.5849 ± 0.0189           |
-|*First CNN: small heatmaps, turbo cmap, bicubic smoothing* | | |              |
-|Balanced Accuracy| 0.8187 ± 0.0584 |              | 0.5856 ± 0.0104           |         
-|Macro F1         | 0.8152 ± 0.0609 |              | 0.5762 ± 0.0175           |
-|**Second CNN: hierarchical model** |  |           |                           |
-| *Finest: 10 clusters* | | | |
-|Balanced Accuracy      | 0.6889 ± 0.0155 |               | 0.5296 ± 0.0122    |         
-|Hier. BA (very similar)| 0.8950 ± 0.0080 |               | 0.7976 ± 0.0075    |
-|Hier. BA (mod. similar)| 0.9554 ± 0.0038 |               | 0.8961 ± 0.0063    |
-|Hier. BA (different)   | 0.9813 ± 0.0018 |               | 0.9427 ± 0.0078    |
-| *Medium: 6 clusters* | | | |
-|Balanced Accuracy      | 0.8108 ± 0.0227 |               | 0.6485 ± 0.0130    |         
-|Hier. BA (very similar)| 0.9566 ± 0.0050 |               | 0.9051 ± 0.0022    |
-|Hier. BA (mod. similar)| 0.9966 ± 0.0015 |               | 0.9842 ± 0.0062    |
-|Hier. BA (different)   | 0.9966 ± 0.0015 |               | 0.9842 ± 0.0062    |
-| *Coarse: 4 clusters* | | | |
-|Balanced Accuracy      | 0.8577 ± 0.0168 |               | 0.6809 ± 0.0191    |         
-|Hier. BA (very similar)| 0.9958 ± 0.0017 |               | 0.9769 ± 0.0051    |
-|Hier. BA (mod. similar)| 0.9993 ± 0.0005 |               | 0.9936 ± 0.0042    |
-|Hier. BA (different)   | 0.9993 ± 0.0005 |               | 0.9936 ± 0.0042    |
-| *Coarsest: 2 clusters* | | | |
-|Balanced Accuracy      | 0.9028 ± 0.0053 |               | 0.8002 ± 0.0182    |         
-|Hier. BA (very similar)| 1.0000 ± 0.0000 |               | 1.0000 ± 0.0000    |
-|Hier. BA (mod. similar)| 1.0000 ± 0.0000 |               | 1.0000 ± 0.0000    |
-|Hier. BA (different)   | 1.0000 ± 0.0000 |               | 1.0000 ± 0.0000    |
+|Balanced Accuracy| 0.84 ± 0.04 |              | 0.67 ± 0.02           |
+| **Second CNN: tuning with optuna** |  |           |                           |
+|Balanced Accuracy| 0.89      | 0.70          | 0.67 ± 0.01           |
 
 
 
@@ -57,24 +33,20 @@
 - simple over/undersampling to mean per class for each fold
 - **Comparison to baseline:** CV metics ~ 8-9% better, less overfitting (training scores at 82% not 99)
 
-# Second CNN: hierarchical model
-- The standard CNN was transformed into a multi-level hierarchical model
-- Simultaniously predicts envrionmental clusters at four different scales: 
-    - level 1: 2 groups (coarsest)
-    - level 2: 4 groups
-    - level 3: 6 groups
-    - level 4: 10 groups (original clusters, finest)
-- Method: 
-    - Multi-head model: each level "head" has one dedicated dense layer (more nodes with higher complexity) and a dedicated output layer
-    - Multi-level loss weighting: mistakes between environmentally similar clusters are penalized less than mistakes between distant clusters
-    - Calculates hierarchical accuracy (if distance between true and predicted class is below a threshold, counted as correct):
-        - very_similar: 25th percentile of distances
-        - moderately_similar: 50th percentile of distances
-        - different: 75th percentile of distances
+# Second CNN: tuning with optuna
+- **Hyperparameters:**
+- learning_rate       :  0.0001992020152615974
+- batch_size          :  16
+- dropout_rate_conv   :  0.19513130555193567
+- dropout_rate_dense  :  0.43185696811710184
+- conv_filters_1      :  48
+- conv_filters_2      :  48
+- conv_filters_3      :  96
+- dense_units_1       :  384
+- dense_units_2       :  384
+- noise_level         :  0.13110381486571537
+- block_size          :  4
+- lr_reduction_factor :  0.3969187716995002
+- lr_patience         :  3
+- early_stop_patience :  10
 
-#### Hierarchy of clusters
-![Environmental clusters PCA hierarchy](image-6.png)
-![Environmental clusters map hierarchy](image-5.png)
-
-**Hierarchical accuracy thresholds**
-![thresholds hierarchical acc.](image.png)
