@@ -12,19 +12,23 @@
 - **Evaluation Metric:** Accuracy, Balanced Accuraccy, Macro F1
 - **Performance Scores:** 
 
-|**Metric** |**Training set** | **Test set**| **Cross-Validation Score**|
+|**Metric**       |**Training set** | **Test set**| **Cross-Validation Score**|
 |---|---|---|---|
-|Accuracy| 0.99 | 0.55|  mean=0.5000, std=0.0195|
-|Balanced Accuracy| 0.99| 0.54| mean=0.5005, std=0.0205|
-|Macro F1| 0.99| 0.53| mean=0.4914, std=0.0197|
+|Accuracy         | 0.99|                     0.77|     mean=0.7294, std=0.0253|
+|Balanced Accuracy| 0.99|                     0.74|     mean=0.7296, std=0.0257|
+|Macro F1         | 0.99|                     0.74|     mean=0.7315, std=0.0272|
 
 ### Confusion Matrix
 
-![Confusion Matrix RF](image-1.png)
+![Confusion Matrix RF](image.png)
 
 ### Global feature importance map
 
-![feature importance baseline RF](image-2.png)
+![feature importance baseline RF](image-1.png)
+
+### Per-cluster feature importance (directional SHAP)
+
+![4 mean SHAP value plots](image-2.png)
 
 ### Evaluation Methodology
 - **Data Split:** 
