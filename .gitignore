@@ -1,3 +1,8 @@
+
+3_Model/heatmaps_samples/*.png
+3_Model/heatmaps_samples_02/*.png
+3_Model/heatmaps_samples_32/*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
