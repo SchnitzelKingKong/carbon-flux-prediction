@@ -20,12 +20,13 @@
 - **Label Distribution:** Classes are not balanced, with large differences in cluster sizes. 
 
 | Cluster-No. |	Count |
+|---|---|
 | 0 |	2108 |
 | 2	| 1795 |
 | 1	| 1467 |
 | 3	| 249 |
 
-![Environmental clusters](image.png)
+![cluster characteristics](image.png)
 ![Geographical distribution](image-2.png)
 ![PCA](image-3.png)
 
