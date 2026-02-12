@@ -15,22 +15,15 @@
 ### Target Variable/Label
 - **Label Name:** cluster
 - **Label Type:** Classification
-- **Label Description:** Clusters are based on prior classification of profiles by vertical patterns of environmental variables (e.g., temperature, salinity, nutrients,...; 10 variables in total), see [Notebook](DatasetPreProcessing/2_Environmental_clusters.ipynb). Prediction task: predict the envrionmental cluster based on particle biovolume distribution.
-- **Label Values:** 0-9 (10 clusters, each representing specific envrionmental conditions within the upper 1000 m of the ocean; envrionmental variables were normalized per profile so that **only the vertical pattern of each env. variable is considered, not the absolute value**)
-- **Label Distribution:** Classes are not balanced, with large differences in cluter sizes. 
+- **Label Description:** Clusters are based on prior classification of profiles by vertical patterns of environmental variables (e.g., temperature, salinity, nutrients,...; 4 variables in total), see [Notebook](DatasetPreProcessing/2_Environmental_clusters.ipynb). Prediction task: predict the envrionmental cluster based on particle biovolume distribution.
+- **Label Values:** 0-3 (4 clusters, each representing specific environmental conditions within the upper 1000 m of the ocean; envrionmental variables were normalized per profile so that **only the vertical pattern of each env. variable is considered, not the absolute value**)
+- **Label Distribution:** Classes are not balanced, with large differences in cluster sizes. 
 
-|Cluster | n (cluster) |
-|---|---|
-|4  |  738|
-|0  |  713|
-|8  |  713|
-|2  |  682|
-|7  |  563|
-|1  |  549|
-|6  |  527|
-|9  |  494|
-|5  |  391|
-|3  |  249|
+| Cluster-No. |	Count |
+| 0 |	2108 |
+| 2	| 1795 |
+| 1	| 1467 |
+| 3	| 249 |
 
 ![Environmental clusters](image.png)
 ![Geographical distribution](image-2.png)
