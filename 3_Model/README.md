@@ -13,7 +13,7 @@
 | **Second CNN: tuning with optuna** |            |              |                           |
 |Balanced Accuracy              | 0.85            | 0.75         | 0.79 (10 % validation set)|
 | **Transfer learning model - ResNet50**| | | |
-| | | | |
+|Balanced Accuracy              | 0.99            | 0.66         | -                         |
 
 
 # First CNN
