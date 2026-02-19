@@ -14,7 +14,8 @@
 |Balanced Accuracy              | 0.85            | 0.75         | 0.79 (10 % validation set)|
 | **Transfer learning model - ResNet50**| | | |
 |Balanced Accuracy              | 0.99            | 0.66         | -                         |
-
+| **Transfer learning model - EfficientnetB3**| | | |
+|Balanced Accuracy              | 0.68            | 0.84         | -                         |
 
 # First CNN
 - **Hyperparameters:**
